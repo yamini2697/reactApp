@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Divider, Card} from 'semantic-ui-react';
+//import axios from 'axios';
+import { Divider,Card, Form, Input, Button,Label} from 'semantic-ui-react';
 import {
   FormBuilder,
   FieldGroup,
@@ -14,23 +15,26 @@ export default class Login extends Component {
   handleSubmit = e => {
     console.log('Form values', this.loginForm.value)
     e.preventDefault()
+  
   }
   render() {
     return (
         <Card>
-              <Card.Content>
-      <Card.Header>Sign Up Form</Card.Header>
-      <Divider />
+          <Card.Content>
+            <Card.Header>Sign Up Form</Card.Header>
+         </Card.Content>
+         <Divider />
       <FieldGroup
         control={this.loginForm}
         render={({ invalid }) => (
-          <form onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             <FieldControl
-              name="username"
+              name="firstname"
               options={{ validators: Validators.required }}
               render={({ handler, touched, hasError}) => (
                 <div>
-                  <input placeholder={'First Name'} {...handler()} />
+                  <Label>First Name :</Label>
+                  <Input placeholder={'* Enter Your First Name'} {...handler()} />
                   <span>
                     {touched && hasError('required') && 'Username is required'}
                   </span>
@@ -42,46 +46,62 @@ export default class Login extends Component {
               name="lastname"
               render={({ handler }) => (
                 <div>
-                    <input placeholder={'Last Name'} {...handler()} />
+                  <Label>Last Name  :</Label>
+                    <Input placeholder={'Enter Your Last Name'} {...handler()} />
                 </div>
               )}
             />
             <Divider />
             <FieldControl
               name="email"
-              render={({ handler }) => (
+              options={{ validators: Validators.required }}
+              render={({ handler, touched, hasError }) => (
                 <div>
-                    <input placeholder={'Email'} {...handler()} />
+                  <Label>Email Id        :</Label>
+                    <Input type="email" placeholder={'*Enter Your Email'} {...handler()} />
+                    <span>
+                      {touched && hasError('required') && 'Email is required'}
+                  </span>
                 </div>
               )}
             />
             <Divider />
             <FieldControl
               name="password"
-              render={({ handler }) => (
+              options={{ validators: Validators.required }}
+              render={({ handler, touched, hasError }) => (
                 <div>
-                    <input placeholder={'Password'} {...handler()} />
+                  <Label>Password       :</Label>
+                    <Input type="password" placeholder={'*Enter Your Password'} {...handler()} />
+                    <span>
+                      {touched && hasError('required') && 'Password is required'}
+                  </span>
                 </div>
               )}
             />
             <Divider />
             <FieldControl
               name="Mobileno"
+              options={{ validators: Validators.required }}
               render={({ handler, touched, hasError }) => (
                 <div>
-                    <input placeholder={'Mobile Number'} {...handler()} />
+                  <Label>Mobile No   :</Label>
+                    <Input placeholder={'*Enter Your Mobile Number'} {...handler()} />
+                    <span>
+                      {touched && hasError('required') && 'Username is required'}
+                  </span>
                 </div>
               )}
             />
             <Divider />
-            <button type="submit" disabled={invalid}>
+            <Button color='teal' type="submit" disabled={invalid}>
               Sign Up
-            </button>
-          </form>
+            </Button>
+          </Form>
         )}
       />
-      </Card.Content>
-      </Card>
+     
+     </Card>
     )
   }
 }
